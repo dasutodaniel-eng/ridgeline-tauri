@@ -3153,7 +3153,7 @@ dependencies = [
 
 [[package]]
 name = "ridgeline"
-version = "1.0.0"
+version = "0.1.0-beta"
 dependencies = [
  "async-stream",
  "base64 0.22.1",

@@ -93,19 +93,19 @@ pub fn init(dir: &Path) {
         .map(|t| t.to_string())
         .filter(|t| !t.is_empty());
     let token = match (v.get("enc").and_then(|e| e.as_bool()).unwrap_or(false), token) {
-        // токен из Electron зашифрован DPAPI — читаем как есть
-        (true, Some(b64)) => {
+        // токен в DPAPI-шифровании (windows-only формат) — читаем как есть
+        (true, Some(b64_enc)) => {
             #[cfg(windows)]
             {
                 base64::engine::general_purpose::STANDARD
-                    .decode(b64)
+                    .decode(b64_enc)
                     .ok()
                     .and_then(|blob| dpapi_unprotect(&blob))
                     .and_then(|b| String::from_utf8(b).ok())
             }
             #[cfg(not(windows))]
             {
-                None // формат safeStorage macOS не восстанавливаем: нужен повторный вход
+                None // DPAPI на этой платформе недоступен: нужен повторный вход в Яндекс
             }
         }
         (false, Some(t)) => Some(t),

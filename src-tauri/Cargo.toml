@@ -1,6 +1,6 @@
 [package]
 name = "ridgeline"
-version = "1.0.0"
+version = "0.1.0-beta"
 edition = "2021"
 description = "Ridgeline — музыкальный плеер"
 
