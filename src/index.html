@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ridgeline</title>
+  <link rel="icon" href="assets/icon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="splash" class="splash"></div>
+  <div class="scene" aria-hidden="true">
+    <svg class="layer l0" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gBase" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3c3c3c"/><stop offset="1" stop-color="#161616"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#gBase)"/></svg>
+    <svg class="layer l1" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#555"/><stop offset="1" stop-color="#262626"/></linearGradient></defs><path d="M1920 0L1920 1080L1100 1080C1000 900 1240 560 1380 330C1480 170 1520 60 1560 0Z" fill="url(#g1)" stroke="rgba(255,255,255,.16)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    <svg class="layer l2" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#474747"/><stop offset="1" stop-color="#202020"/></linearGradient></defs><path d="M0 90C150 170 260 330 480 380C720 440 820 640 940 880C1000 990 1080 1080 1100 1080L0 1080Z" fill="url(#g2)" stroke="rgba(255,255,255,.18)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    <svg class="layer l3" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#303030"/><stop offset="1" stop-color="#121212"/></linearGradient></defs><path d="M0 420C200 470 460 520 640 650C800 770 880 900 960 1080L0 1080Z" fill="url(#g3)" stroke="rgba(255,255,255,.14)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    <svg class="layer l4" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c1c1c"/><stop offset="1" stop-color="#070707"/></linearGradient></defs><path d="M0 760C220 800 400 880 560 1080L0 1080Z" fill="url(#g4)" stroke="rgba(255,255,255,.12)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    <div class="fog"></div>
+  </div>
+  <div class="glow"></div>
+  <div class="grain"></div>
+
+  <header class="titlebar" data-tauri-drag-region>
+    <div class="tb-left">
+      <div class="brand" data-tauri-drag-region><span class="mark" id="brandMark"></span>RIDGELINE</div>
+      <button class="wbtn nv" id="btnBack" aria-label="Назад" title="Назад (Alt+←)"><svg viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"/></svg></button>
+      <button class="wbtn nv" id="btnFwd" aria-label="Вперёд" title="Вперёд (Alt+→)"><svg viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></svg></button>
+    </div>
+    <label class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input id="search" type="text" placeholder="Поиск" spellcheck="false" autocomplete="off" />
+    </label>
+    <div class="tb-right">
+      <button class="wbtn" id="btnMin" aria-label="Свернуть"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></button>
+      <button class="wbtn" id="btnMax" aria-label="Развернуть"><svg viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11"/></svg></button>
+      <button class="wbtn close" id="btnClose" aria-label="Закрыть"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="main" id="main"></main>
+
+  <footer class="player">
+    <div class="p-glow"></div>
+    <div class="p-left">
+      <div class="cv big" id="pcover"></div>
+      <div class="p-meta">
+        <div class="p-title" id="ptitle">Ничего не играет</div>
+        <div class="p-artist" id="partist">Выбери трек в библиотеке</div>
+      </div>
+      <button class="ico" id="pmore" aria-label="Больше такого" title="Больше такого (без лайка)"><svg viewBox="0 0 24 24"><path d="M3 12h3l2.5-6 4 12 2.5-8 1.5 2H21"/><path d="M19 4v4M17 6h4"/></svg></button>
+      <button class="ico" id="pdislike" aria-label="Не рекомендовать" title="Не моё: больше не предлагать"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M6.4 6.4l11.2 11.2"/></svg></button>
+      <button class="ico heart" id="pheart" aria-label="В любимые" title="В любимые"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+    </div>
+
+    <div class="p-center">
+      <div class="controls">
+        <button class="ico tgl" id="btnShuffle" aria-label="Перемешать" title="Перемешать (S)"><svg viewBox="0 0 24 24"><path d="M3 7h3.5c2 0 3.2 1 4.3 2.6l2.4 3.8c1.1 1.6 2.3 2.6 4.3 2.6H21M3 17h3.5c2 0 3.2-1 4.3-2.6M13.2 10.6c1.1-1.6 2.3-2.6 4.3-2.6H21M18.5 5.5L21 8l-2.5 2.5M18.5 13.5L21 16l-2.5 2.5"/></svg></button>
+        <button class="ico" id="btnPrev" aria-label="Предыдущий" title="Предыдущий (P)"><svg viewBox="0 0 24 24"><path d="M7 6v12M18 6.5v11L10 12z"/></svg></button>
+        <button class="play" id="btnPlay" aria-label="Играть" title="Играть / пауза (Пробел)">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13L19 12z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M9 5.5v13M15 5.5v13"/></svg>
+        </button>
+        <button class="ico" id="btnNext" aria-label="Следующий" title="Следующий (N)"><svg viewBox="0 0 24 24"><path d="M17 6v12M6 6.5v11L14 12z"/></svg></button>
+        <button class="ico tgl" id="btnRepeat" aria-label="Повтор" title="Повтор (R)"><svg viewBox="0 0 24 24"><path d="M4 11V9.5A2.5 2.5 0 0 1 6.5 7H19M16.5 4.5L19 7l-2.5 2.5M20 13v1.5a2.5 2.5 0 0 1-2.5 2.5H5M7.5 19.5L5 17l2.5-2.5"/></svg></button>
+      </div>
+      <div class="seekrow">
+        <span id="tCur">00:00</span>
+        <input type="range" class="range seek" id="seek" min="0" max="1000" value="0" aria-label="Перемотка" />
+        <span id="tDur">00:00</span>
+      </div>
+    </div>
+
+    <div class="p-right">
+      <button class="ico" id="btnQueue" aria-label="Очередь" title="Очередь"><svg viewBox="0 0 24 24"><path d="M4 7h12M4 12h12M4 17h7M18 14.5v5M15.5 17h5"/></svg></button>
+      <button class="ico" id="btnMute" aria-label="Звук" title="Без звука (M)"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5zM15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg></button>
+      <input type="range" class="range volume" id="volume" min="0" max="100" value="80" aria-label="Громкость" />
+    </div>
+  </footer>
+
+  <div class="menu" id="menu"></div>
+  <div class="modal" id="modal"></div>
+  <div class="drop" id="drop">Отпусти, чтобы добавить в очередь</div>
+  <div class="toast" id="toast"></div>
+  <audio id="audio" preload="auto"></audio>
+  <script src="vendor/hls.min.js"></script>
+  <script src="api.js"></script>
+  <script type="module" src="renderer/main.js"></script>
+</body>
+</html>

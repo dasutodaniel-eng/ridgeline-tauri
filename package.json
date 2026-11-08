@@ -1,0 +1,14 @@
+{
+  "name": "ridgeline-tauri",
+  "productName": "Ridgeline",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Ridgeline — музыкальный плеер с Линией и Яндекс Музыкой (Tauri)",
+  "scripts": {
+    "start": "tauri dev",
+    "dist": "tauri build"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

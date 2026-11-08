@@ -1,0 +1,31 @@
+[package]
+name = "ridgeline"
+version = "1.0.0"
+edition = "2021"
+description = "Ridgeline — музыкальный плеер"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-single-instance = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["fs", "io-util", "sync", "time", "macros", "rt-multi-thread"] }
+reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "rustls-tls-native-roots"] }
+rfd = "0.15"
+lofty = "0.22"
+hmac = "0.12"
+sha2 = "0.10"
+md-5 = "0.10"
+base64 = "0.22"
+urlencoding = "2"
+dirs = "6"
+async-stream = "0.3"
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_Security_Cryptography", "Win32_System_Memory"] }
+
+[profile.release]
+lto = true
+codegen-units = 1
