@@ -10,7 +10,7 @@ jobs:
         with: { node-version: 22 }
       - run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
       - run: npm install --no-audit --no-fund
-      - run: npm run dist -- --target universal-apple-darwin
+      - run: npm run dist -- --target universal-apple-darwin --bundles app,dmg
       - run: ditto -c -k src-tauri/target/universal-apple-darwin/release/bundle/macos/Ridgeline.app Ridgeline-macOS-universal.app.zip
       - uses: actions/upload-artifact@v4
         with:
